@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+//React router
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+// Pages & Components
+import Home from "./pages/Home/Home";
+import Card from "./pages/Card/Card";
+import SignIn from "./dashboard/SignIn/SignIn";
+import Auth from "./utils/Auth";
+import ResponsiveDrawer from "./dashboard/Drawer/ResponsiveDrawer";
+import DashIndex from "./dashboard/DashIndex/DashIndex";
+
+import CardEditPage from "./dashboard/CardEditPage/CardEditPage";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/">
+
+          <Route index element={<Home />} />
+          <Route path="card/:id" element={<Card />} />
+          <Route path="admin" element={<SignIn />} />
+
+
+          {/* Protected route */}
+          <Route element={<Auth />}>
+            <Route path="dashboard" element={<ResponsiveDrawer />} >
+
+              <Route index element={<DashIndex />} />
+
+              <Route path="edit/:id" element={<CardEditPage />} />
+
+            </Route>
+          </Route>
+
+      </Route>
+    )
   );
+
+
+
+
+
+  return <RouterProvider router={router} />
 }
 
 export default App;

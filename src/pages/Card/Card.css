@@ -1,0 +1,91 @@
+.card_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 516px;
+  margin: auto;
+  background-color: #fef8fb;
+  margin-top: -10px;
+
+  .card_img_box {
+    img {
+      width: 100%;
+    }
+  }
+
+  .location_box {
+    padding-top: 16px;
+    padding-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    text-align: center;
+
+    a {
+      text-decoration: none;
+      background-color: #ef5da8;
+      color: #fef8fb;
+      padding: 6px 16px;
+      border-radius: 6px;
+      display: inline-block;
+      transition: 0.2s;
+
+      &:hover {
+        background-color: #fef8fb;
+        color: #623e97;
+      }
+    }
+  }
+
+  .form_card_box {
+    margin: -22px;
+    border-top-right-radius: 22px;
+    border-top-left-radius: 22px;
+    padding: 32px;
+    color: #fef8fb;
+    width: 100%;
+    background: linear-gradient(270deg, #623e97 0%, #8b3b95 50%, #c964a5 100%);
+  }
+
+  input[type="radio"] {
+    accent-color: red !important;
+  }
+
+  span {
+    color: red;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  .rad {
+    width: 170px;
+  }
+
+  .form-check-label {
+    color: #fef8fb;
+    font-weight: 300;
+    margin-right: 16px;
+  }
+
+  input,
+  textarea {
+    background-color: #fef8fb;
+  }
+}
+
+.custom_btn {
+  background-color: #ef5da8 !important;
+  color: #fef8fb !important;
+  border-color: transparent !important;
+
+  &:hover {
+    background-color: #fef8fb !important;
+    color: #623e97 !important;
+  }
+}

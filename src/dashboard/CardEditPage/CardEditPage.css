@@ -1,0 +1,32 @@
+.sale-container {
+  height: calc(100vh - 112px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .sale-box {
+    padding: 16px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 16px;
+  }
+
+  .img-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    /* margin: auto; */
+
+    img {
+      width: 100%;
+      border-radius: 9px;
+    }
+  }
+
+  .alert_hide_me {
+    position: fixed;
+    top: -5%;
+    background-color: #edf4fc;
+    transition: 0.5s;
+  }
+}

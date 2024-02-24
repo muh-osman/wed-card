@@ -1,0 +1,19 @@
+.dash_index_cotainer {
+  height: calc(100vh - 112px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  h1 {
+    font-weight: 600;
+    color: #757575;
+  }
+
+  a {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+  }
+}
