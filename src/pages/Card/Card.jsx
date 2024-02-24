@@ -13,6 +13,10 @@ export default function Card() {
   const [attendance, setAttendance] = useState("");
   const [message, setMessage] = useState("");
 
+  const handleRadioChange = (event) => {
+    setAttendance(event.target.value);
+  };
+
   const [clickedButton, setClickedButton] = useState(true);
 
   async function fetchData() {
@@ -37,16 +41,13 @@ export default function Card() {
       // await api.post("api/sale/1?_method=PATCH", {
       //   sale: sale,
       // });
-      // Show the alert
-      document.getElementById("success-alert").style.top = "77px";
+
+      console.log(name);
+      console.log(attendance);
+      console.log(message);
 
       // Stop button animation
       setClickedButton(false);
-
-      // Hide the alert after 5 seconds
-      setTimeout(function () {
-        document.getElementById("success-alert").style.top = "-5%";
-      }, 4000);
 
       // Fetch data again
       // fetchData();
@@ -90,9 +91,10 @@ export default function Card() {
           </label>
           <div className="form-check rad">
             <input
-              value={attendance}
+              value="بحضر بإذن الله"
+              checked={attendance === "بحضر بإذن الله"}
+              onChange={handleRadioChange}
               className="form-check-input"
-              onChange={(e) => setAttendance(e.target.value)}
               type="radio"
               name="flexRadioDefault"
               id="flexRadioDefault1"
@@ -103,6 +105,9 @@ export default function Card() {
           </div>
           <div className="form-check rad mb-4">
             <input
+              value="أعتذر عن الحضور"
+              checked={attendance === "أعتذر عن الحضور"}
+              onChange={handleRadioChange}
               className="form-check-input"
               type="radio"
               name="flexRadioDefault"

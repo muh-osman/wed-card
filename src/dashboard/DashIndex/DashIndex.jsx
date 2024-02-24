@@ -9,7 +9,7 @@ export default function DashIndex() {
     <div className="dash_index_cotainer">
       <h1>To edit the card page, choose the page from the sidebar.</h1>
 
-      <Link to="/">
+      <Link to="add">
         <Fab
           sx={{
             color: "#fff",

@@ -9,6 +9,7 @@ import ResponsiveDrawer from "./dashboard/Drawer/ResponsiveDrawer";
 import DashIndex from "./dashboard/DashIndex/DashIndex";
 
 import CardEditPage from "./dashboard/CardEditPage/CardEditPage";
+import AddPage from "./dashboard/AddPage/AddPage";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
 
               <Route index element={<DashIndex />} />
 
+              <Route path="add" element={<AddPage />} />
               <Route path="edit/:id" element={<CardEditPage />} />
 
             </Route>

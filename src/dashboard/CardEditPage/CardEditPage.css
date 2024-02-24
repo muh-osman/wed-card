@@ -1,21 +1,38 @@
-.sale-container {
-  height: calc(100vh - 112px);
+.images-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
-  .sale-box {
-    padding: 16px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 16px;
-  }
+  min-height: calc(100vh - 112px);
 
   .img-box {
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 500px;
-    /* margin: auto; */
+    margin: auto;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  form {
+    max-width: 500px;
+    margin-bottom: 64px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .form-image-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 16px;
 
     img {
       width: 100%;
@@ -28,5 +45,11 @@
     top: -5%;
     background-color: #edf4fc;
     transition: 0.5s;
+  }
+
+  .btn_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }

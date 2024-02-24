@@ -1,4 +1,4 @@
-import "./CardEditPage.css";
+import "./AddPage.css";
 import { useEffect, useState } from "react";
 // API
 import api from "../../api";
@@ -12,8 +12,7 @@ import Swal from "sweetalert2";
 
 // Test image
 import testImage from "../../assets/images/card-1.jpg";
-
-export default function CardEditPage() {
+export default function AddPage() {
   const [sale, setSale] = useState("");
   const [clickedButton, setClickedButton] = useState(true);
 
@@ -58,27 +57,6 @@ export default function CardEditPage() {
       console.error(err);
     }
   }
-
-  const deleteAlert = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-      }
-    });
-  };
-
   return (
     <div className="images-container">
       {/* Alert */}
@@ -93,13 +71,26 @@ export default function CardEditPage() {
 
       {/* form */}
       <form onSubmit={submitData} encType="multipart/form-data">
-        <div className="form-image-box">
+        {/* <div className="form-image-box">
           <img src={testImage} alt="card image" />
+        </div> */}
+
+        <div className="mb-3">
+          <label htmlFor="exampleInputTitle" className="form-label">
+            Add title:
+          </label>
+          <input
+            type="text"
+            name="title"
+            className="form-control"
+            id="exampleInputTitle"
+            aria-describedby="emailHelp"
+          />
         </div>
 
         <div className="mb-3">
           <label htmlFor="exampleInputEmail" className="form-label">
-            Edit image:
+            Add image:
           </label>
           <input
             type="file"
@@ -112,7 +103,7 @@ export default function CardEditPage() {
 
         <div className="mb-3">
           <label htmlFor="exampleInputTitle" className="form-label">
-            Edit location link:
+            Add location link:
           </label>
           <input
             // defaultValue={location}
@@ -127,7 +118,7 @@ export default function CardEditPage() {
 
         <div className="mb-3">
           <label htmlFor="exampleInputLink" className="form-label">
-            Edit google sheets API:
+            Add google sheets API:
           </label>
           <input
             // defaultValue={api}
@@ -152,17 +143,9 @@ export default function CardEditPage() {
                 role="status"
               ></div>
             ) : (
-              "Edit"
+              "Create page"
             )}
           </button>
-
-          <IconButton
-            onClick={deleteAlert}
-            aria-label="delete"
-            sx={{ "&:hover": { color: "red" } }}
-          >
-            <DeleteIcon />
-          </IconButton>
         </div>
       </form>
     </div>

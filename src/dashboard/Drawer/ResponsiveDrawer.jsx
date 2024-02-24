@@ -34,18 +34,28 @@ function ResponsiveDrawer(props) {
   const data = [
     {
       id: 1,
-      name: "Sale",
+      name: "Mandh",
       path: "/dashboard/edit/1",
     },
     {
       id: 2,
-      name: "Images",
+      name: "Marmand Bader",
       path: "/dashboard/edit/2",
     },
     {
       id: 3,
-      name: "Video",
+      name: "Baby saud",
       path: "/dashboard/edit/3",
+    },
+    {
+      id: 4,
+      name: "Bride Lamya",
+      path: "/dashboard/edit/4",
+    },
+    {
+      id: 5,
+      name: "Baby ward",
+      path: "/dashboard/edit/5",
     },
   ];
 
