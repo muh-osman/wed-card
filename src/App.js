@@ -28,8 +28,7 @@ function App() {
             <Route path="dashboard" element={<ResponsiveDrawer />} >
 
               <Route index element={<DashIndex />} />
-
-              <Route path="add" element={<AddPage />} />
+              <Route path="create" element={<AddPage />} />
               <Route path="edit/:id" element={<CardEditPage />} />
 
             </Route>

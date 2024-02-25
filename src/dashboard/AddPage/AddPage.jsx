@@ -1,79 +1,66 @@
 import "./AddPage.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // API
 import api from "../../api";
-// MUI icon
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import DeleteIcon from "@mui/icons-material/Delete";
-// MUI
-import IconButton from "@mui/material/IconButton";
 // sweetalert
 import Swal from "sweetalert2";
 
-// Test image
-import testImage from "../../assets/images/card-1.jpg";
 export default function AddPage() {
-  const [sale, setSale] = useState("");
-  const [clickedButton, setClickedButton] = useState(true);
+  // Store image to show
+  const [image, setImage] = useState(null);
+  const handleImageChange = (e) => {
+    const selectedFile = e.target.files[0];
+    const imageUrl = URL.createObjectURL(selectedFile);
+    setImage(imageUrl);
+  };
 
-  const [clickedButtonId, setClickedButtonId] = useState(null);
+  const [clickedButton, setClickedButton] = useState(false);
 
-  async function fetchData() {
-    try {
-      // const res = await api.get("api/sale/1");
-      // console.log(res.data.sale.sale);
-      // setSale(res.data.sale.sale);
-      setClickedButton(false);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // navigate
+  const nav = useNavigate();
 
   async function submitData(e) {
     e.preventDefault();
     setClickedButton(true);
+    const form = document.getElementById("create-form");
+    const formData = new FormData(form);
     try {
-      // await api.post("api/sale/1?_method=PATCH", {
-      //   sale: sale,
-      // });
-      // Show the alert
-      document.getElementById("success-alert").style.top = "77px";
+      const res = await api.post("api/cards", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       // Stop button animation
       setClickedButton(false);
-
-      // Hide the alert after 5 seconds
-      setTimeout(function () {
-        document.getElementById("success-alert").style.top = "-5%";
-      }, 4000);
-
-      // Fetch data again
-      // fetchData();
+      // Show alert
+      Swal.fire({
+        title: "Page created successfully!",
+        icon: "success",
+        confirmButtonColor: "#b6ac9a",
+      }).then(() => {
+        // Navigate to /
+        nav("/");
+      });
     } catch (err) {
       console.error(err);
+      setClickedButton(false);
     }
   }
   return (
     <div className="images-container">
-      {/* Alert */}
-      <div
-        className="alert alert-success d-flex align-items-center alert_hide_me"
-        role="alert"
-        id="success-alert"
-      >
-        <CheckCircleOutlineIcon className="me-2 fs-4" />
-        <div>All changes saved</div>
-      </div>
-
       {/* form */}
-      <form onSubmit={submitData} encType="multipart/form-data">
-        {/* <div className="form-image-box">
-          <img src={testImage} alt="card image" />
-        </div> */}
+      <form
+        onSubmit={submitData}
+        encType="multipart/form-data"
+        id="create-form"
+      >
+        {image && (
+          <div className="form-image-box">
+            <img src={image} alt="card image" />
+          </div>
+        )}
 
         <div className="mb-3">
           <label htmlFor="exampleInputTitle" className="form-label">
@@ -85,6 +72,7 @@ export default function AddPage() {
             className="form-control"
             id="exampleInputTitle"
             aria-describedby="emailHelp"
+            required
           />
         </div>
 
@@ -93,11 +81,13 @@ export default function AddPage() {
             Add image:
           </label>
           <input
+            onChange={handleImageChange}
             type="file"
             name="image"
             className="form-control"
             id="exampleInputEmail"
             aria-describedby="emailHelp"
+            required
           />
         </div>
 
@@ -107,7 +97,7 @@ export default function AddPage() {
           </label>
           <input
             // defaultValue={location}
-            name="location"
+            name="link"
             type="text"
             className="form-control"
             id="exampleInputTitle"
@@ -133,11 +123,11 @@ export default function AddPage() {
 
         <div className="btn_box">
           <button
-            onClick={setClickedButtonId}
             type="submit"
             className="btn btn-primary mt-2 mb-2"
+            style={{ width: "120px" }}
           >
-            {clickedButtonId ? (
+            {clickedButton ? (
               <div
                 className="spinner-border spinner-border-sm"
                 role="status"

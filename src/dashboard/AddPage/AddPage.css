@@ -1,56 +1,62 @@
 .images-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  min-height: calc(100vh - 112px);
+
+  .img-box {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-  
-    min-height: calc(100vh - 112px);
-  
-    .img-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 500px;
-      margin: auto;
-  
-      img {
-        width: 100%;
-      }
-    }
-  
-    form {
-      max-width: 500px;
-      margin-bottom: 64px;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      padding: 16px;
-      border-radius: 16px;
-    }
-  
-    .form-image-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 500px;
-      margin: auto;
-      margin-bottom: 16px;
-  
-      img {
-        width: 100%;
-        border-radius: 9px;
-      }
-    }
-  
-    .alert_hide_me {
-      position: fixed;
-      top: -5%;
-      background-color: #edf4fc;
-      transition: 0.5s;
-    }
-  
-    .btn_box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    max-width: 500px;
+    margin: auto;
+
+    img {
+      width: 100%;
     }
   }
-  
+
+  form {
+    max-width: 500px;
+    margin-bottom: 64px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .form-image-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 16px;
+
+    img {
+      width: 100%;
+      border-radius: 9px;
+    }
+  }
+
+  .alert_hide_me {
+    position: fixed;
+    top: -5%;
+    background-color: #edf4fc;
+    transition: 0.5s;
+  }
+
+  .btn_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* sweet alert btn */
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm:focus,
+div:where(.swal2-container)
+  button:where(.swal2-styled).swal2-default-outline:focus {
+  box-shadow: none !important;
+}

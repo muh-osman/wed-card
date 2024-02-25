@@ -9,14 +9,21 @@ export default function DashIndex() {
     <div className="dash_index_cotainer">
       <h1>To edit the card page, choose the page from the sidebar.</h1>
 
-      <Link to="add">
+      <Link
+        to="create"
+        style={{
+          position: "fixed",
+          bottom: "32px",
+          right: "32px",
+        }}
+      >
         <Fab
           sx={{
             color: "#fff",
             backgroundColor: "#b6ac9a",
             "&:hover": { backgroundColor: "#837966 " },
           }}
-          aria-label="add"
+          aria-label="create"
         >
           <AddIcon />
         </Fab>

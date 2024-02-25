@@ -21,43 +21,35 @@ import Button from "@mui/material/Button";
 import logo from "../../assets/images/logo-slim.jpg";
 // MUI icons
 import StyleIcon from "@mui/icons-material/Style";
-
-// import XIcon from "@mui/icons-material/X";
-// import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-// import InstagramIcon from "@mui/icons-material/Instagram";
+//
+import { useState, useEffect } from "react";
+import api from "../../api";
+// useContext
+import { useContext } from "react";
+import { TrigerContext } from "../../context/trigerProvider";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
+  // useContext
+  const { triger, setTriger } = useContext(TrigerContext);
+  //
   const nav = useNavigate();
+  const [data, setData] = useState([]);
 
-  const data = [
-    {
-      id: 1,
-      name: "Mandh",
-      path: "/dashboard/edit/1",
-    },
-    {
-      id: 2,
-      name: "Marmand Bader",
-      path: "/dashboard/edit/2",
-    },
-    {
-      id: 3,
-      name: "Baby saud",
-      path: "/dashboard/edit/3",
-    },
-    {
-      id: 4,
-      name: "Bride Lamya",
-      path: "/dashboard/edit/4",
-    },
-    {
-      id: 5,
-      name: "Baby ward",
-      path: "/dashboard/edit/5",
-    },
-  ];
+  async function fetchData() {
+    try {
+      const res = await api.get("api/cards");
+      setData(res.data);
+      // console.log(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [triger]);
 
   const { pathname } = useLocation();
 
@@ -97,8 +89,8 @@ function ResponsiveDrawer(props) {
               disablePadding
               button
               component={Link}
-              to={item.path}
-              selected={item.path === pathname}
+              to={`/dashboard/edit/${item.id}`}
+              selected={`/dashboard/edit/${item.id}` === pathname}
             >
               <ListItemButton sx={{ color: "#757575" }}>
                 <ListItemIcon>
@@ -113,7 +105,7 @@ function ResponsiveDrawer(props) {
                     <StyleIcon sx={{ color: "#757575" }} />
                   </Avatar>
                 </ListItemIcon>
-                <ListItemText primary={item.name} />
+                <ListItemText primary={item.title} />
               </ListItemButton>
             </ListItem>
           );
