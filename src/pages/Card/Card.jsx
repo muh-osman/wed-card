@@ -87,7 +87,7 @@ export default function Card() {
         </div> */}
 
         <form name={`submit-to-google-sheet-${id}`} onSubmit={handleSubmit}>
-          <div style={{textAlign: "center", marginBottom: "16px"}}>
+          <div style={{ textAlign: "center", marginBottom: "16px" }}>
             <h2>أكدي لنا حضورك</h2>
           </div>
           {/* الاسم */}
@@ -158,7 +158,11 @@ export default function Card() {
           </div>
 
           <div className="text-center">
-            <button type="submit" className="btn btn-primary custom_btn" style={{width: "64.38px"}}>
+            <button
+              type="submit"
+              className="btn btn-primary custom_btn"
+              style={{ width: "64.38px" }}
+            >
               {clickedButton ? (
                 <div
                   className="spinner-border spinner-border-sm"

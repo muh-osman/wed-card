@@ -38,7 +38,9 @@ export default function Home() {
       className="card text-decoration-none"
       style={{ width: "18rem" }}
     >
-      <img src={image} className="card-img-top" alt="card image" />
+      <div className="img_home_box">
+        <img src={image} className="card-img-top" alt="card image" />
+      </div>
       <div className="card-body">
         <h5 className="card-title text-center m-0" dir="auto">
           {title}
