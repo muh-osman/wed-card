@@ -4,16 +4,20 @@
   align-items: center;
   justify-content: center;
   max-width: 516px;
+  /* max-width: 400px; */
   margin: auto;
   /* background-color: #fef8fb; */
+  position: relative;
 
   .card_img_box {
+    width: 100%;
+
     img {
       width: 100%;
     }
   }
 
-  .location_box {
+  /* .location_box {
     padding-top: 16px;
     padding-bottom: 32px;
     display: flex;
@@ -38,7 +42,7 @@
         color: #623e97;
       }
     }
-  }
+  } */
 
   .form_card_box {
     padding: 32px;
@@ -46,7 +50,7 @@
     width: 100%;
     /* background: linear-gradient(270deg, #623e97 0%, #8b3b95 50%, #c964a5 100%); */
     background-color: transparent;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -74,20 +78,17 @@
     font-weight: 300;
     margin-right: 16px;
   }
-
-  input,
-  textarea {
-    background-color: #fef8fb;
-  }
 }
 
 .custom_btn {
-  background-color: #ef5da8 !important;
+  background-color: #000 !important;
   color: #fef8fb !important;
   border-color: transparent !important;
-
+  border-color: transparent !important;
+  
   &:hover {
+    border-color: transparent !important;
     background-color: #fef8fb !important;
-    color: #623e97 !important;
+    color: #000 !important;
   }
 }
