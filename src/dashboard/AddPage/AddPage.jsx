@@ -62,6 +62,7 @@ export default function AddPage() {
           </div>
         )}
 
+        {/* Title */}
         <div className="mb-3">
           <label htmlFor="exampleInputTitle" className="form-label">
             Add title:
@@ -76,6 +77,23 @@ export default function AddPage() {
           />
         </div>
 
+        {/* API */}
+        <div className="mb-3">
+          <label htmlFor="exampleInputLink" className="form-label">
+            Add google sheets API:
+          </label>
+          <input
+            // defaultValue={api}
+            name="api"
+            type="text"
+            className="form-control"
+            id="exampleInputLink"
+            aria-describedby="emailHelp"
+            required
+          />
+        </div>
+
+        {/* Image */}
         <div className="mb-3">
           <label htmlFor="exampleInputEmail" className="form-label">
             Add image:
@@ -91,31 +109,17 @@ export default function AddPage() {
           />
         </div>
 
-        <div className="mb-3">
+        {/* Location */}
+        <div className="mb-3 d-none">
           <label htmlFor="exampleInputTitle" className="form-label">
             Add location link:
           </label>
           <input
-            // defaultValue={location}
+            defaultValue={"disabled by user"}
             name="link"
             type="text"
             className="form-control"
             id="exampleInputTitle"
-            aria-describedby="emailHelp"
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="exampleInputLink" className="form-label">
-            Add google sheets API:
-          </label>
-          <input
-            // defaultValue={api}
-            name="api"
-            type="text"
-            className="form-control"
-            id="exampleInputLink"
             aria-describedby="emailHelp"
             required
           />

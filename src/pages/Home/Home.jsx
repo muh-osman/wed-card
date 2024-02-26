@@ -33,6 +33,7 @@ export default function Home() {
 
   const cards = data.map(({ id, image, title }) => (
     <Link
+      key={id}
       to={`card/${id}`}
       className="card text-decoration-none"
       style={{ width: "18rem" }}

@@ -48,6 +48,8 @@ export default function CardEditPage() {
   }
 
   useEffect(() => {
+    setImage(null)
+    document.getElementsByTagName("form")[0].reset();
     fetchData();
   }, [id]);
 
@@ -73,8 +75,6 @@ export default function CardEditPage() {
         showConfirmButton: false,
         timer: 2000,
       });
-
-      // Fetch data again
     } catch (err) {
       console.error(err);
     }
@@ -119,23 +119,8 @@ export default function CardEditPage() {
           {image && <img src={image} alt="card image" />}
         </div>
 
-        {/* Image */}
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail" className="form-label">
-            Edit image:
-          </label>
-          <input
-            onChange={handleImageChange}
-            type="file"
-            name="image"
-            className="form-control"
-            id="exampleInputEmail"
-            aria-describedby="emailHelp"
-          />
-        </div>
-
         {/* Location */}
-        <div className="mb-3">
+        <div className="mb-3 d-none">
           <label htmlFor="exampleInputTitle" className="form-label">
             Edit location link:
           </label>
@@ -165,6 +150,22 @@ export default function CardEditPage() {
             id="exampleInputLink"
             aria-describedby="emailHelp"
             required
+          />
+        </div>
+
+        {/* Image */}
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail" className="form-label">
+            Edit image:
+          </label>
+          <input
+            onChange={handleImageChange}
+            type="file"
+            name="image"
+            className="form-control"
+            id="exampleInputEmail"
+            aria-describedby="emailHelp"
+            // defaultValue={image}
           />
         </div>
 

@@ -5,8 +5,7 @@
   justify-content: center;
   max-width: 516px;
   margin: auto;
-  background-color: #fef8fb;
-  margin-top: -10px;
+  /* background-color: #fef8fb; */
 
   .card_img_box {
     img {
@@ -42,13 +41,16 @@
   }
 
   .form_card_box {
-    margin: -22px;
-    border-top-right-radius: 22px;
-    border-top-left-radius: 22px;
     padding: 32px;
     color: #fef8fb;
     width: 100%;
-    background: linear-gradient(270deg, #623e97 0%, #8b3b95 50%, #c964a5 100%);
+    /* background: linear-gradient(270deg, #623e97 0%, #8b3b95 50%, #c964a5 100%); */
+    background-color: transparent;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 516px;
   }
 
   input[type="radio"] {

@@ -1,14 +1,15 @@
 import "./Card.css";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 // MUI icons
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 // Me(Axios)
 import api from "../../api";
-
-// Test image
-import testImage from "../../assets/images/card-1.jpg";
+// sweetalert
+import Swal from "sweetalert2";
 
 export default function Card() {
+  // Form
   const [name, setName] = useState("");
   const [attendance, setAttendance] = useState("");
   const [message, setMessage] = useState("");
@@ -17,14 +18,19 @@ export default function Card() {
     setAttendance(event.target.value);
   };
 
-  const [clickedButton, setClickedButton] = useState(true);
+  const [clickedButton, setClickedButton] = useState(false);
 
+  const { id } = useParams();
+
+  const [data, setData] = useState(null);
   async function fetchData() {
     try {
-      // const res = await api.get("api/sale/1");
-      // console.log(res.data.sale.sale);
-      // setSale(res.data.sale.sale);
-      setClickedButton(false);
+      const res = await api.get(`api/cards/${id}`);
+      // console.log(res.data);
+      setData(res.data);
+      if (res.data) {
+        document.title = res.data.title;
+      }
     } catch (err) {
       console.error(err);
     }
@@ -34,41 +40,53 @@ export default function Card() {
     fetchData();
   }, []);
 
-  async function submitData(e) {
+  // submit form
+  const form = document.forms[`submit-to-google-sheet-${id}`];
+
+  async function handleSubmit(e) {
+    let scriptURL = data.api;
     e.preventDefault();
     setClickedButton(true);
+
     try {
-      // await api.post("api/sale/1?_method=PATCH", {
-      //   sale: sale,
-      // });
-
-      console.log(name);
-      console.log(attendance);
-      console.log(message);
-
-      // Stop button animation
+      const res = await fetch(scriptURL, {
+        method: "POST",
+        body: new FormData(form),
+      });
+      console.log("Success!", res);
       setClickedButton(false);
 
-      // Fetch data again
-      // fetchData();
-    } catch (err) {
-      console.error(err);
+      setName("");
+      setAttendance("");
+      setMessage("");
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "شكرا لك",
+        text: "تم ارسال الرسالة بنجاح",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    } catch (error) {
+      console.error("Error!", error.message);
+      setClickedButton(false);
     }
   }
 
   return (
     <div className="card_container">
       <div className="card_img_box">
-        <img src={testImage} alt="card image" />
+        {data && <img src={data.image} alt="card image" />}
       </div>
 
       <div className="form_card_box" dir="rtl">
-        <div className="location_box">
+        {/* <div className="location_box">
           <LocationOnIcon sx={{ fontSize: "32px", color: "#fff" }} />
-          <a href="https://maps.app.goo.gl/7fdjLdKZXUZnaUXZA">الموقع</a>
-        </div>
+          <a href={data?.link}>الموقع</a>
+        </div> */}
 
-        <form onSubmit={submitData}>
+        <form name={`submit-to-google-sheet-${id}`} onSubmit={handleSubmit}>
           {/* الاسم */}
           <div className="mb-4">
             <label htmlFor="exampleInputEmail1" className="form-label">
@@ -79,6 +97,7 @@ export default function Card() {
               onChange={(e) => setName(e.target.value)}
               type="text"
               className="form-control"
+              name="name"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               required
@@ -96,8 +115,9 @@ export default function Card() {
               onChange={handleRadioChange}
               className="form-check-input"
               type="radio"
-              name="flexRadioDefault"
+              name="attendance"
               id="flexRadioDefault1"
+              required
             />
             <label className="form-check-label" htmlFor="flexRadioDefault1">
               بحضر بإذن الله
@@ -110,8 +130,9 @@ export default function Card() {
               onChange={handleRadioChange}
               className="form-check-input"
               type="radio"
-              name="flexRadioDefault"
+              name="attendance"
               id="flexRadioDefault2"
+              required
             />
             <label className="form-check-label" htmlFor="flexRadioDefault2">
               أعتذر عن الحضور
@@ -134,7 +155,7 @@ export default function Card() {
           </div>
 
           <div className="text-center">
-            <button type="submit" className="btn btn-primary custom_btn">
+            <button type="submit" className="btn btn-primary custom_btn" style={{width: "65px"}}>
               {clickedButton ? (
                 <div
                   className="spinner-border spinner-border-sm"

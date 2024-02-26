@@ -27,3 +27,8 @@ body {
   border-color: #b6ac9a !important;
   box-shadow: 0 0 0 0.25rem #b6ac9a6c !important;
 }
+
+input,
+textarea {
+  color: #837966 !important;
+}
