@@ -5,5 +5,5 @@ export default function Auth() {
 
   //   console.log(authState);
 
-  return authState == "true" ? <Outlet /> : <Navigate to="/admin" />;
+  return authState == "true" ? <Outlet /> : <Navigate to="/" />;
 }

@@ -1,14 +1,16 @@
 import "./CardEditPage.css";
 import { useEffect, useState, useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 // API
 import api from "../../api";
 // MUI icon
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+// import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 // sweetalert
 import Swal from "sweetalert2";
 // useContext
@@ -20,11 +22,14 @@ export default function CardEditPage() {
   //
   const nav = useNavigate();
 
+  const [pageLink, setPageLink] = useState(null);
+  const [copyDone, setCopyDone] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const [clickedButton, setClickedButton] = useState(false);
   // image
   const [apiSheet, setApiSheet] = useState("");
+  const [title, setTitle] = useState(null);
   const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
   const handleImageChange = (e) => {
@@ -34,6 +39,7 @@ export default function CardEditPage() {
   };
 
   const { id } = useParams();
+  const domain = window.location.origin; //Ex: http://localhost:3000
 
   async function fetchData() {
     try {
@@ -42,13 +48,16 @@ export default function CardEditPage() {
       setImage(res.data.image);
       setApiSheet(res.data.api);
       setLink(res.data.link);
+      setTitle(res.data.title);
+
+      setPageLink(`${domain}/card/${id}`);
     } catch (err) {
       console.error(err);
     }
   }
 
   useEffect(() => {
-    setImage(null)
+    setImage(null);
     document.getElementsByTagName("form")[0].reset();
     fetchData();
   }, [id]);
@@ -99,7 +108,7 @@ export default function CardEditPage() {
   const handleDelete = async () => {
     setDeleteLoading(true);
     try {
-      const res = await api.delete(`api/cards/${id}`);
+      await api.delete(`api/cards/${id}`);
       setTriger((prev) => prev + 1);
       nav("/dashboard");
     } catch (err) {
@@ -107,8 +116,27 @@ export default function CardEditPage() {
     }
   };
 
+  const handleCopy = () => {
+    console.log(pageLink);
+
+    navigator.clipboard
+      .writeText(pageLink)
+      .then(() => {
+        console.log("Page link copied to clipboard");
+      })
+      .catch((error) => {
+        console.error("Failed to copy page link to clipboard", error);
+      });
+
+    // Show sccusess icon
+    setCopyDone(true);
+  };
+
   return (
     <div className="images-container">
+      <h1 style={{ color: "#757575", marginBottom: "16px" }}>
+        Edit {title && title} page
+      </h1>
       {/* form */}
       <form
         onSubmit={submitData}
@@ -186,21 +214,32 @@ export default function CardEditPage() {
             )}
           </button>
 
-          {/* Delete Button */}
-          <IconButton
-            onClick={deleteAlert}
-            aria-label="delete"
-            sx={{ "&:hover": { color: "red" } }}
-          >
-            {deleteLoading ? (
-              <div
-                className="spinner-border spinner-border-sm"
-                role="status"
-              ></div>
-            ) : (
-              <DeleteIcon />
-            )}
-          </IconButton>
+          <div>
+            {/* Copy Button */}
+            <IconButton
+              onClick={handleCopy}
+              aria-label="copy"
+              sx={{ "&:hover": { color: "#000" } }}
+            >
+              {copyDone ? <DoneOutlineIcon /> : <ContentCopyIcon />}
+            </IconButton>
+
+            {/* Delete Button */}
+            <IconButton
+              onClick={deleteAlert}
+              aria-label="delete"
+              sx={{ "&:hover": { color: "red" } }}
+            >
+              {deleteLoading ? (
+                <div
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                ></div>
+              ) : (
+                <DeleteIcon />
+              )}
+            </IconButton>
+          </div>
         </div>
       </form>
 

@@ -1,7 +1,7 @@
 //React router
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 // Pages & Components
-import Home from "./pages/Home/Home";
+// import Home from "./pages/Home/Home";
 import Card from "./pages/Card/Card";
 import SignIn from "./dashboard/SignIn/SignIn";
 import Auth from "./utils/Auth";
@@ -18,9 +18,9 @@ function App() {
     createRoutesFromElements(
       <Route path="/">
 
-          <Route index element={<Home />} />
+          <Route index element={<SignIn />} />
           <Route path="card/:id" element={<Card />} />
-          <Route path="admin" element={<SignIn />} />
+          {/* <Route path="admin" element={<SignIn />} /> */}
 
 
           {/* Protected route */}

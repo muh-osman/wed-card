@@ -21,6 +21,7 @@ import Button from "@mui/material/Button";
 import logo from "../../assets/images/logo-slim.jpg";
 // MUI icons
 import StyleIcon from "@mui/icons-material/Style";
+import HomeIcon from "@mui/icons-material/Home";
 //
 import { useState, useEffect } from "react";
 import api from "../../api";
@@ -81,6 +82,34 @@ function ResponsiveDrawer(props) {
       <Divider />
 
       <List>
+        {/* Home */}
+        <ListItem
+          dir="ltr"
+          disablePadding
+          button
+          component={Link}
+          to="/dashboard"
+          selected={`/dashboard` === pathname}
+        >
+          <ListItemButton sx={{ color: "#000" }}>
+            <ListItemIcon>
+              <Avatar
+                alt="icon"
+                sx={{
+                  width: 36,
+                  height: 36,
+                  backgroundColor: "transparent",
+                }}
+              >
+                <HomeIcon sx={{ color: "#000" }} />
+              </Avatar>
+            </ListItemIcon>
+            <ListItemText primary={"Home"} />
+          </ListItemButton>
+        </ListItem>
+
+        <Divider />
+
         {data.map((item) => {
           return (
             <ListItem
@@ -113,64 +142,6 @@ function ResponsiveDrawer(props) {
 
         {/* <Divider /> */}
 
-        {/* <Stack
-          dir="ltr"
-          direction="row"
-          spacing={2}
-          sx={{
-            justifyContent: "center",
-            gap: "16px",
-            padding: "8px",
-            height: "calc(100vh - 257px)",
-            alignItems: "flex-end",
-          }}
-        >
-          <a href="https://twitter.com/" style={{ margin: 0 }}>
-            <Avatar
-              alt="Twitter"
-              sx={{ width: 24, height: 24, backgroundColor: "transparent" }}
-            >
-              <XIcon
-                sx={{ color: "#757575", "&:hover": { color: "#00acee" } }}
-              />
-            </Avatar>
-          </a>
-          <a href="https://www.facebook.com/" style={{ margin: 0 }}>
-            <Avatar
-              alt="YouTube"
-              sx={{ width: 24, height: 24, backgroundColor: "transparent" }}
-            >
-              <FacebookRoundedIcon
-                sx={{ color: "#757575", "&:hover": { color: "#316FF6" } }}
-              />
-            </Avatar>
-          </a>
-          <a href="https://instagram.com/" style={{ margin: 0 }}>
-            <Avatar
-              alt="Instagram"
-              sx={{ width: 24, height: 24, backgroundColor: "transparent" }}
-            >
-              <InstagramIcon
-                sx={{ color: "#757575", "&:hover": { color: "#cd486b" } }}
-              />
-            </Avatar>
-          </a>
-        </Stack> */}
-
-        {/* <Typography
-          style={{
-            textAlign: "center",
-            justifyContent: "center",
-            fontSize: "12px",
-            fontWeight: "400",
-          }}
-          align="center"
-          variant="h6"
-          noWrap
-          component="h1"
-        >
-          © 2024 Tsmim Seham
-        </Typography> */}
       </List>
     </div>
   );
@@ -264,6 +235,7 @@ function ResponsiveDrawer(props) {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
+          backgroundColor: "#fbfbfb",
         }}
       >
         <Toolbar />

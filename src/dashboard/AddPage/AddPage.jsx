@@ -1,12 +1,16 @@
 import "./AddPage.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 // API
 import api from "../../api";
 // sweetalert
 import Swal from "sweetalert2";
+// useContext
+import { TrigerContext } from "../../context/trigerProvider";
 
 export default function AddPage() {
+  // useContext
+  const { triger, setTriger } = useContext(TrigerContext);
   // Store image to show
   const [image, setImage] = useState(null);
   const handleImageChange = (e) => {
@@ -40,8 +44,10 @@ export default function AddPage() {
         icon: "success",
         confirmButtonColor: "#b6ac9a",
       }).then(() => {
+        // refetch sidebar data
+        setTriger((prev) => prev + 1);
         // Navigate to /
-        nav("/");
+        nav("/dashboard");
       });
     } catch (err) {
       console.error(err);
@@ -50,6 +56,7 @@ export default function AddPage() {
   }
   return (
     <div className="images-container">
+      <h1 style={{color: "#757575", marginBottom: "16px"}}>Create new page</h1>
       {/* form */}
       <form
         onSubmit={submitData}
@@ -129,7 +136,7 @@ export default function AddPage() {
           <button
             type="submit"
             className="btn btn-primary mt-2 mb-2"
-            style={{ width: "120px" }}
+            style={{ width: "76.91px" }}
           >
             {clickedButton ? (
               <div
@@ -137,7 +144,7 @@ export default function AddPage() {
                 role="status"
               ></div>
             ) : (
-              "Create page"
+              "Create"
             )}
           </button>
         </div>
