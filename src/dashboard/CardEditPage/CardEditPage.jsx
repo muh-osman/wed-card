@@ -134,8 +134,10 @@ export default function CardEditPage() {
 
   return (
     <div className="images-container">
-      <h1 style={{ color: "#757575", marginBottom: "16px" }}>
-        Edit {title && title} page
+      <h1
+        style={{ color: "#757575", marginBottom: "16px", textAlign: "center" }}
+      >
+        Edit {title && <span style={{ color: "#000" }}>"{title}"</span>} page
       </h1>
       {/* form */}
       <form
