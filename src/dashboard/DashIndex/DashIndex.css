@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   text-align: center; */
+  min-height: calc(100vh - 112px);
   
   h1 {
     font-weight: 600;
@@ -19,7 +20,7 @@
   /* margin-top: 64px; */
   padding: 16px;
   padding-top: 32px;
-  min-height: calc(100vh - 112px);
+  /* min-height: calc(100vh - 112px); */
   /* background-color: #fbfbfb; */
   display: flex;
   align-items: center;

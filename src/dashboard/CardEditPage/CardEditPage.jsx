@@ -57,6 +57,7 @@ export default function CardEditPage() {
   }
 
   useEffect(() => {
+    setCopyDone(false);
     setImage(null);
     document.getElementsByTagName("form")[0].reset();
     fetchData();

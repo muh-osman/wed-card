@@ -28,8 +28,6 @@ export default function DashIndex() {
     <Link
       key={id}
       to={`/card/${id}`}
-      target="_blank"
-      rel="noopener noreferrer"
       className="card text-decoration-none"
       style={{ width: "18rem" }}
     >
