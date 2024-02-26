@@ -56,7 +56,7 @@ export default function AddPage() {
   }
   return (
     <div className="images-container">
-      <h1 style={{color: "#757575", marginBottom: "16px"}}>Create new page</h1>
+      <h1 style={{color: "#757575", marginBottom: "16px"}}>Create a new page</h1>
       {/* form */}
       <form
         onSubmit={submitData}
