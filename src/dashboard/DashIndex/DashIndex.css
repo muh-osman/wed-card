@@ -52,3 +52,9 @@
   height: 275px;
   overflow: hidden;
 }
+
+.card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

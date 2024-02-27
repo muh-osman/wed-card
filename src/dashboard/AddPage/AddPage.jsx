@@ -56,7 +56,9 @@ export default function AddPage() {
   }
   return (
     <div className="images-container">
-      <h1 style={{color: "#757575", marginBottom: "16px"}}>Create a new page</h1>
+      <h1 style={{ color: "#757575", marginBottom: "16px" }}>
+        Create a new page
+      </h1>
       {/* form */}
       <form
         onSubmit={submitData}
@@ -75,6 +77,7 @@ export default function AddPage() {
             Add title:
           </label>
           <input
+            dir="auto"
             type="text"
             name="title"
             className="form-control"
