@@ -1,4 +1,4 @@
-import "./CardEditPage.css";
+import "./Edit.css";
 import { useEffect, useState, useContext } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 // API
@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 // useContext
 import { TrigerContext } from "../../context/trigerProvider";
 
-export default function CardEditPage() {
+export default function Edit() {
   // useContext
   const { triger, setTriger } = useContext(TrigerContext);
   //
@@ -39,7 +39,7 @@ export default function CardEditPage() {
   };
 
   const { id } = useParams();
-  
+
   // const domain = window.location.origin; //Ex: http://localhost:3000
 
   async function fetchData() {

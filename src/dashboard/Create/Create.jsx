@@ -1,4 +1,4 @@
-import "./AddPage.css";
+import "./Create.css";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 // API
@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 // useContext
 import { TrigerContext } from "../../context/trigerProvider";
 
-export default function AddPage() {
+export default function Create() {
   // useContext
   const { triger, setTriger } = useContext(TrigerContext);
   // Store image to show

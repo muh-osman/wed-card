@@ -1,6 +1,6 @@
-import "./DashIndex.css";
+import "./Index.css";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 // MUI icons
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
@@ -10,11 +10,10 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 // Me(Axios)
 import api from "../../api";
 
-export default function DashIndex() {
+export default function Index() {
   // Copy button
   const [copyDone, setCopyDone] = useState(false);
   const [pageLink, setPageLink] = useState(null);
-  // const { id } = useParams();
   const domain = window.location.origin; //Ex: http://localhost:3000
 
   const [data, setData] = useState([]);

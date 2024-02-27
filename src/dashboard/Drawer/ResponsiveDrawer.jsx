@@ -64,7 +64,7 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar style={{ justifyContent: "center" }}>
-        <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+        <Link to="/dashboard" style={{ textDecoration: "none", color: "#fff" }}>
           <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
             <Avatar
               alt="Remy Sharp"
@@ -141,7 +141,6 @@ function ResponsiveDrawer(props) {
         })}
 
         {/* <Divider /> */}
-
       </List>
     </div>
   );
