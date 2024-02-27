@@ -1,10 +1,10 @@
 import "./Home.css";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // Logo
-import logo from "../../assets/images/logo-slim.jpg";
+// import logo from "../../assets/images/logo-slim.jpg";
 // Me(Axios)
-import api from "../../api";
+// import api from "../../api";
 // Test Image
 // import cardOne from "../../assets/images/card-1.jpg";
 // import cardTwo from "../../assets/images/card-2.jpg";
@@ -63,7 +63,7 @@ export default function Home() {
 
       <div className="home_container">
         {/* <div className="cards_box">{cards}</div> */}
-        <img src={logo} alt="logo" />
+        {/* <img src={logo} alt="logo" /> */}
       </div>
     </>
   );

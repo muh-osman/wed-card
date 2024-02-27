@@ -1,6 +1,6 @@
 import "./CardEditPage.css";
 import { useEffect, useState, useContext } from "react";
-import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 // API
 import api from "../../api";
 // MUI icon
