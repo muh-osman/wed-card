@@ -7,6 +7,8 @@ import AddIcon from "@mui/icons-material/Add";
 import IconButton from "@mui/material/IconButton";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import TableRowsIcon from "@mui/icons-material/TableRows";
+
 // Me(Axios)
 import api from "../../api";
 
@@ -31,6 +33,11 @@ export default function Index() {
     fetchData();
   }, []);
 
+  const goToTable = (e, id) => {
+    e.preventDefault();
+    window.open(`${domain}/table/${id}`, "_blank");
+  };
+
   const cards = data.map(({ id, image, title }) => (
     <Link
       key={id}
@@ -48,18 +55,29 @@ export default function Index() {
           {title}
         </h5>
 
-        {/* Copy Button */}
-        <IconButton
-          onClick={(e) => handleCopy(e, id)}
-          aria-label="copy"
-          sx={{ "&:hover": { color: "#000" } }}
-        >
-          {copyDone && pageLink === `${domain}/card/${id}` ? (
-            <DoneOutlineIcon />
-          ) : (
-            <ContentCopyIcon />
-          )}
-        </IconButton>
+        <div>
+          {/* table Button */}
+          <IconButton
+            onClick={(e) => goToTable(e, id)}
+            aria-label="table"
+            sx={{ "&:hover": { color: "#000" } }}
+          >
+            <TableRowsIcon />
+          </IconButton>
+
+          {/* Copy Button */}
+          <IconButton
+            onClick={(e) => handleCopy(e, id)}
+            aria-label="copy"
+            sx={{ "&:hover": { color: "#000" } }}
+          >
+            {copyDone && pageLink === `${domain}/card/${id}` ? (
+              <DoneOutlineIcon />
+            ) : (
+              <ContentCopyIcon />
+            )}
+          </IconButton>
+        </div>
       </div>
     </Link>
   ));
@@ -90,6 +108,7 @@ export default function Index() {
         <div className="cards_box">{cards}</div>
       </div>
 
+      {/* Floating + to add page */}
       <Link
         to="create"
         style={{

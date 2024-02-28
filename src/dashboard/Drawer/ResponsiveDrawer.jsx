@@ -23,10 +23,9 @@ import logo from "../../assets/images/logo-slim.jpg";
 import StyleIcon from "@mui/icons-material/Style";
 import HomeIcon from "@mui/icons-material/Home";
 //
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "../../api";
 // useContext
-import { useContext } from "react";
 import { TrigerContext } from "../../context/trigerProvider";
 
 const drawerWidth = 240;

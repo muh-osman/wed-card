@@ -8,8 +8,9 @@ import {
 // Utils
 import Auth from "./utils/Auth";
 // Pages & Components
-import Card from "./pages/Card/Card";
 import SignIn from "./dashboard/SignIn/SignIn";
+import Card from "./pages/Card/Card";
+import Table from "./pages/Table/Table";
 import ResponsiveDrawer from "./dashboard/Drawer/ResponsiveDrawer";
 import Index from "./dashboard/Index/Index";
 import Create from "./dashboard/Create/Create";
@@ -21,6 +22,7 @@ function App() {
       <Route path="/">
         <Route index element={<SignIn />} />
         <Route path="card/:id" element={<Card />} />
+        <Route path="table/:id" element={<Table />} />
 
         <Route element={<Auth />}>
           {/* Protected route */}

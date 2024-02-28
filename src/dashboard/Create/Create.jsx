@@ -88,13 +88,13 @@ export default function Create() {
         </div>
 
         {/* API */}
-        <div className="mb-3">
+        <div className="mb-3 d-none">
           <label htmlFor="exampleInputLink" className="form-label">
             Add google sheets API:
           </label>
           <input
-            // defaultValue={api}
             name="api"
+            defaultValue={"disabled by user"}
             type="text"
             className="form-control"
             id="exampleInputLink"

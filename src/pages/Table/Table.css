@@ -1,0 +1,11 @@
+.table_container {
+  h1 {
+    color: #757575;
+  }
+
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

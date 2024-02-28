@@ -118,21 +118,6 @@ export default function Edit() {
     }
   };
 
-  // const handleCopy = () => {
-  //   console.log(pageLink);
-
-  //   navigator.clipboard
-  //     .writeText(pageLink)
-  //     .then(() => {
-  //       console.log("Page link copied to clipboard");
-  //     })
-  //     .catch((error) => {
-  //       console.error("Failed to copy page link to clipboard", error);
-  //     });
-
-  //   // Show sccusess icon
-  //   setCopyDone(true);
-  // };
 
   return (
     <div className="images-container">
@@ -169,7 +154,7 @@ export default function Edit() {
         </div>
 
         {/* API */}
-        <div className="mb-3">
+        <div className="mb-3 d-none">
           <label htmlFor="exampleInputLink" className="form-label">
             Edit google sheets API:
           </label>

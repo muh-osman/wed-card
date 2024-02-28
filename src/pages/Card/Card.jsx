@@ -2,7 +2,7 @@ import "./Card.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // MUI icons
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+// import LocationOnIcon from "@mui/icons-material/LocationOn";
 // Me(Axios)
 import api from "../../api";
 // sweetalert
@@ -44,15 +44,12 @@ export default function Card() {
   const form = document.forms[`submit-to-google-sheet-${id}`];
 
   async function handleSubmit(e) {
-    let scriptURL = data.api;
+    // let scriptURL = data.api;
     e.preventDefault();
     setClickedButton(true);
-
+    const formData = new FormData(form);
     try {
-      const res = await fetch(scriptURL, {
-        method: "POST",
-        body: new FormData(form),
-      });
+      const res = await api.post(`api/cards/${id}/Data`, formData);
       console.log("Success!", res);
       setClickedButton(false);
 
