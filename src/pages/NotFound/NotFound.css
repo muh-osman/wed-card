@@ -1,0 +1,11 @@
+.not_found_container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a202c;
+
+  h1 {
+    color: #a0aec0;
+  }
+}

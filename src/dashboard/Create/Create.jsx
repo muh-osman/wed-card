@@ -74,7 +74,7 @@ export default function Create() {
         {/* Title */}
         <div className="mb-3">
           <label htmlFor="exampleInputTitle" className="form-label">
-            Add title:
+            Title<span>*</span>
           </label>
           <input
             dir="auto"
@@ -106,16 +106,32 @@ export default function Create() {
         {/* Image */}
         <div className="mb-3">
           <label htmlFor="exampleInputEmail" className="form-label">
-            Add image:
+            Image<span>*</span>
           </label>
           <input
             onChange={handleImageChange}
             type="file"
             name="image"
+            accept="image/*"
             className="form-control"
             id="exampleInputEmail"
             aria-describedby="emailHelp"
             required
+          />
+        </div>
+
+        {/* Audio */}
+        <div className="mb-3">
+          <label htmlFor="exampleInputAudio" className="form-label">
+            Audio (optional)
+          </label>
+          <input
+            type="file"
+            name="audio"
+            accept="audio/*"
+            className="form-control"
+            id="exampleInputAudio"
+            aria-describedby="emailHelp"
           />
         </div>
 

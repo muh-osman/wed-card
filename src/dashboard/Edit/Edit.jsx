@@ -118,7 +118,6 @@ export default function Edit() {
     }
   };
 
-
   return (
     <div className="images-container">
       <h1
@@ -173,16 +172,32 @@ export default function Edit() {
         {/* Image */}
         <div className="mb-3">
           <label htmlFor="exampleInputEmail" className="form-label">
-            Edit image:
+            Image:
           </label>
           <input
             onChange={handleImageChange}
             type="file"
             name="image"
+            accept="image/*"
             className="form-control"
             id="exampleInputEmail"
             aria-describedby="emailHelp"
             // defaultValue={image}
+          />
+        </div>
+
+        {/* Audio */}
+        <div className="mb-3">
+          <label htmlFor="exampleInputAudio" className="form-label">
+            Audio (optional)
+          </label>
+          <input
+            type="file"
+            accept="audio/*"
+            name="audio"
+            className="form-control"
+            id="exampleInputAudio"
+            aria-describedby="emailHelp"
           />
         </div>
 

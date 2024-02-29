@@ -1,14 +1,18 @@
 import "./Card.css";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // MUI icons
 // import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
 // Me(Axios)
 import api from "../../api";
 // sweetalert
 import Swal from "sweetalert2";
 
 export default function Card() {
+  //
+  const nav = useNavigate();
   // Form
   const [name, setName] = useState("");
   const [attendance, setAttendance] = useState("");
@@ -23,16 +27,27 @@ export default function Card() {
   const { id } = useParams();
 
   const [data, setData] = useState(null);
+  const [audioType, setAudioType] = useState("");
   async function fetchData() {
     try {
       const res = await api.get(`api/cards/${id}`);
-      // console.log(res.data);
+      // console.log(res);
       setData(res.data);
+
       if (res.data) {
         document.title = res.data.title;
+
+        if (res.data.audio) {
+          const audioFileExtension = res.data.audio.split(".").pop();
+          setAudioType(audioFileExtension);
+        }
       }
     } catch (err) {
       console.error(err);
+      if (err.response && err.response.status === 404) {
+        console.log("this page was deleted");
+        nav("/this-page-has-been-deleted");
+      }
     }
   }
 
@@ -70,6 +85,20 @@ export default function Card() {
       setClickedButton(false);
     }
   }
+
+  // Audio btn
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const audioBtnClick = () => {
+    const audio = document.getElementById("myAudio");
+    if (audio.paused) {
+      audio.play();
+      setIsPlaying(true);
+    } else {
+      audio.pause();
+      setIsPlaying(false);
+    }
+  };
 
   return (
     <div className="card_container">
@@ -172,6 +201,24 @@ export default function Card() {
           </div>
         </form>
       </div>
+
+      {/* Audio button */}
+      {data?.audio && (
+        <div className="audio_container">
+          <audio id="myAudio" loop>
+            <source src={data.audio} type={`audio/${audioType}`} />
+            Your browser does not support the audio element.
+          </audio>
+          <div className="bg"></div>
+          <button id="playPauseButton" onClick={audioBtnClick}>
+            {isPlaying ? (
+              <PauseIcon sx={{ color: "#fff" }} />
+            ) : (
+              <PlayArrowIcon sx={{ color: "#fff" }} />
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

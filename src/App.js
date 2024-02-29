@@ -15,6 +15,7 @@ import ResponsiveDrawer from "./dashboard/Drawer/ResponsiveDrawer";
 import Index from "./dashboard/Index/Index";
 import Create from "./dashboard/Create/Create";
 import Edit from "./dashboard/Edit/Edit";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   const router = createBrowserRouter(
@@ -25,14 +26,16 @@ function App() {
         <Route path="table/:id" element={<Table />} />
 
         <Route element={<Auth />}>
-          {/* Protected route */}
+          {/* Start Protected route */}
           <Route path="dashboard" element={<ResponsiveDrawer />}>
             <Route index element={<Index />} />
             <Route path="create" element={<Create />} />
             <Route path="edit/:id" element={<Edit />} />
           </Route>
-          {/* Protected route */}
+          {/* End Protected route */}
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Route>
     )
   );

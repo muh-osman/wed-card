@@ -92,3 +92,79 @@
     color: #000 !important;
   }
 }
+
+/* Audio button */
+.audio_container {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+
+  #playPauseButton {
+    padding: 20px 20px;
+    width: 16px;
+    height: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4c3022;
+    position: relative;
+    z-index: 999;
+  }
+
+  #playPauseIcon {
+    font-size: 16px;
+    color: #e3e3e1;
+  }
+
+  /* Button animation */
+  .bg,
+  .button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+  }
+
+  .bg {
+    animation: pulse 1.2s ease infinite;
+    background: #4c3022;
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 99;
+    border: none;
+    background: #4c3022;
+    background-size: 18px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .button a {
+    position: absolute;
+    color: #fff;
+    font-size: 17px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
