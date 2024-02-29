@@ -8,7 +8,7 @@ import {
 // Utils
 import Auth from "./utils/Auth";
 // Pages & Components
-import SignIn from "./dashboard/SignIn/SignIn";
+import SignIn from "./pages/SignIn/SignIn";
 import Card from "./pages/Card/Card";
 import Table from "./pages/Table/Table";
 import ResponsiveDrawer from "./dashboard/Drawer/ResponsiveDrawer";

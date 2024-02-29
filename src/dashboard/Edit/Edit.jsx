@@ -28,9 +28,7 @@ export default function Edit() {
 
   const [clickedButton, setClickedButton] = useState(false);
   // image
-  const [apiSheet, setApiSheet] = useState("");
   const [title, setTitle] = useState(null);
-  const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -47,8 +45,6 @@ export default function Edit() {
       const res = await api.get(`api/cards/${id}`);
       // console.log(res.data);
       setImage(res.data.image);
-      setApiSheet(res.data.api);
-      setLink(res.data.link);
       setTitle(res.data.title);
 
       // setPageLink(`${domain}/card/${id}`);
@@ -68,26 +64,56 @@ export default function Edit() {
     e.preventDefault();
     setClickedButton(true);
     const form = document.getElementById(`edit-form-${id}`);
+
+    if (!form.checkValidity()) {
+      // Handle form validation errors
+      console.log("Form is not valid");
+      return;
+    }
+
     const formData = new FormData(form);
     try {
-      await api.post(`api/cards/${id}?_method=PATCH`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await api.post(
+        `api/cards/${id}?_method=PATCH`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
+      // Check if the response is successful
+      if (response.status === 200) {
+        // Update the state or perform any necessary actions
+        console.log("Data submitted successfully");
+        // Stop button animation
+        setClickedButton(false);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "All changes saved",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      } else {
+        // Handle API error
+        console.log("Error submitting data");
+        // Stop button animation
+        setClickedButton(false);
+      }
+    } catch (err) {
+      // Handle network errors
+      console.error(err);
       // Stop button animation
       setClickedButton(false);
-
+      // Display an error message to the user
       Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "All changes saved",
-        showConfirmButton: false,
-        timer: 2000,
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please try again.",
       });
-    } catch (err) {
-      console.error(err);
     }
   }
 
@@ -119,7 +145,7 @@ export default function Edit() {
   };
 
   return (
-    <div className="images-container">
+    <div className="edit-page-container">
       <h1
         style={{ color: "#757575", marginBottom: "16px", textAlign: "center" }}
       >
@@ -133,40 +159,6 @@ export default function Edit() {
       >
         <div className="form-image-box">
           {image && <img src={image} alt="card image" />}
-        </div>
-
-        {/* Location */}
-        <div className="mb-3 d-none">
-          <label htmlFor="exampleInputTitle" className="form-label">
-            Edit location link:
-          </label>
-          <input
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-            name="link"
-            type="text"
-            className="form-control"
-            id="exampleInputTitle"
-            aria-describedby="emailHelp"
-            required
-          />
-        </div>
-
-        {/* API */}
-        <div className="mb-3 d-none">
-          <label htmlFor="exampleInputLink" className="form-label">
-            Edit google sheets API:
-          </label>
-          <input
-            value={apiSheet}
-            onChange={(e) => setApiSheet(e.target.value)}
-            name="api"
-            type="text"
-            className="form-control"
-            id="exampleInputLink"
-            aria-describedby="emailHelp"
-            required
-          />
         </div>
 
         {/* Image */}
@@ -218,17 +210,8 @@ export default function Edit() {
             )}
           </button>
 
+          {/* Delete Button */}
           <div>
-            {/* Copy Button */}
-            {/* <IconButton
-              onClick={handleCopy}
-              aria-label="copy"
-              sx={{ "&:hover": { color: "#000" } }}
-            >
-              {copyDone ? <DoneOutlineIcon /> : <ContentCopyIcon />}
-            </IconButton> */}
-
-            {/* Delete Button */}
             <IconButton
               onClick={deleteAlert}
               aria-label="delete"

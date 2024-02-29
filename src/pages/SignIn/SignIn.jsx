@@ -1,20 +1,15 @@
 import * as React from "react";
+import { useNavigate, Navigate, Link } from "react-router-dom";
+// MUI
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import { Link as RouterLink } from "react-router-dom";
-
-// import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate, Navigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -25,14 +20,14 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <RouterLink
+      <Link
         style={{ color: "#00000099" }}
         to="/"
         onMouseEnter={(e) => (e.target.style.color = "#1976d2")}
         onMouseLeave={(e) => (e.target.style.color = "#00000099")}
       >
         Tsmim Seham
-      </RouterLink>{" "}
+      </Link>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -82,11 +77,21 @@ export default function SignIn() {
     <Navigate to="/dashboard" />
   ) : (
     <ThemeProvider theme={customTheme}>
-      <Container component="main" maxWidth="xs" dir="ltr">
+      <Container
+        component="main"
+        maxWidth="xs"
+        dir="ltr"
+        sx={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

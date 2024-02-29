@@ -27,8 +27,8 @@ export default function Create() {
   async function submitData(e) {
     e.preventDefault();
     setClickedButton(true);
-    const form = document.getElementById("create-form");
-    const formData = new FormData(form);
+    const formData = new FormData(e.target);
+
     try {
       const res = await api.post("api/cards", formData, {
         headers: {
@@ -36,8 +36,6 @@ export default function Create() {
         },
       });
 
-      // Stop button animation
-      setClickedButton(false);
       // Show alert
       Swal.fire({
         title: "Page created successfully!",
@@ -50,10 +48,19 @@ export default function Create() {
         nav("/dashboard");
       });
     } catch (err) {
-      console.error(err);
+      // Show error alert
+      Swal.fire({
+        title: "Error",
+        text: "Failed to create page",
+        icon: "error",
+        confirmButtonColor: "#b6ac9a",
+      });
+    } finally {
+      // Stop button animation
       setClickedButton(false);
     }
   }
+
   return (
     <div className="images-container">
       <h1 style={{ color: "#757575", marginBottom: "16px" }}>
@@ -82,22 +89,6 @@ export default function Create() {
             name="title"
             className="form-control"
             id="exampleInputTitle"
-            aria-describedby="emailHelp"
-            required
-          />
-        </div>
-
-        {/* API */}
-        <div className="mb-3 d-none">
-          <label htmlFor="exampleInputLink" className="form-label">
-            Add google sheets API:
-          </label>
-          <input
-            name="api"
-            defaultValue={"disabled by user"}
-            type="text"
-            className="form-control"
-            id="exampleInputLink"
             aria-describedby="emailHelp"
             required
           />
@@ -135,22 +126,7 @@ export default function Create() {
           />
         </div>
 
-        {/* Location */}
-        <div className="mb-3 d-none">
-          <label htmlFor="exampleInputTitle" className="form-label">
-            Add location link:
-          </label>
-          <input
-            defaultValue={"disabled by user"}
-            name="link"
-            type="text"
-            className="form-control"
-            id="exampleInputTitle"
-            aria-describedby="emailHelp"
-            required
-          />
-        </div>
-
+        {/* submit btn */}
         <div className="btn_box">
           <button
             type="submit"
