@@ -69,6 +69,7 @@ export default function Edit() {
 
       // Check if the response is successful
       if (response.status === 201) {
+        
         // Reset the form after submission
         document.getElementsByTagName("form")[0].reset();
 
