@@ -1,3 +1,4 @@
+import axios from "axios";
 import "./Create.css";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,14 +9,15 @@ import Swal from "sweetalert2";
 // useContext
 import { TrigerContext } from "../../context/trigerProvider";
 // .env
-const apiUrl = process.env.REACT_APP_API_URL;
+// const apiUrl = process.env.REACT_APP_API_URL;
+//
 
 export default function Create() {
   // useContext
   const { triger, setTriger } = useContext(TrigerContext);
+  // const [title, setTitle] = useState("");
+  // const [audio, setAudio] = useState(null);
   // Store image to show
-  const [title, setTitle] = useState(null);
-  const [audio, setAudio] = useState(null);
   const [image, setImage] = useState(null);
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -26,76 +28,54 @@ export default function Create() {
   const [clickedButton, setClickedButton] = useState(false);
 
   useEffect(() => {
+    // setTitle("");
     setImage(null);
-    setTitle(null);
-    setAudio(null);
+    // setAudio(null);
     document.getElementsByTagName("form")[0].reset();
   }, []);
 
   // navigate
   const nav = useNavigate();
 
-  // async function submitData(e) {
-  //   e.preventDefault();
-  //   setClickedButton(true);
-  //   const formData = new FormData(e.target);
-
-  //   try {
-  //     let res = await api.post("api/cards", formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //         Connection: "close",
-  //       },
-  //     });
-
-  //     // Check if the response is successful
-  //     if (res.status === 201) {
-  //       // Reset the form after submission
-  //       document.getElementsByTagName("form")[0].reset();
-
-  //       // Show alert
-  //       Swal.fire({
-  //         title: "Page created successfully!",
-  //         icon: "success",
-  //         confirmButtonColor: "#b6ac9a",
-  //       }).then(() => {
-  //         // refetch sidebar data
-  //         setTriger((prev) => prev + 1);
-  //         // Navigate to /dashboard
-  //         nav("/dashboard");
-  //       });
-  //     }
-  //   } catch (err) {
-  //     // Show error alert
-  //     Swal.fire({
-  //       title: "Error",
-  //       text: "Failed to create page",
-  //       icon: "error",
-  //       confirmButtonColor: "#b6ac9a",
-  //     });
-  //   } finally {
-  //     // Stop button animation
-  //     setClickedButton(false);
-  //   }
-  // }
-
-  function submitData(e) {
+  async function submitData(e) {
     e.preventDefault();
-    const formdata = new FormData();
-    formdata.append("title", title);
-    formdata.append("image", image);
-    formdata.append("audio", audio);
+    setClickedButton(true);
+    const formData = new FormData(e.target);
 
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
+    try {
+      let res = await axios.postForm(
+        "https://h-creations.net/test/public/api/cards",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    fetch(`${apiUrl}api/cards`, requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
+      // Check if the response is successful
+      if (res.status === 201) {
+        // Reset the form after submission
+        document.getElementsByTagName("form")[0].reset();
+        // Show success alert
+        Swal.fire({
+          title: "Page created successfully!",
+          icon: "success",
+          confirmButtonColor: "#b6ac9a",
+        }).then(() => {
+          // refetch sidebar data
+          setTriger((prev) => prev + 1);
+          // Navigate to /dashboard
+          nav("/dashboard");
+        });
+      }
+    } catch (err) {
+      //
+      console.log(err);
+    } finally {
+      // Stop button animation
+      setClickedButton(false);
+    }
   }
 
   return (
@@ -121,14 +101,13 @@ export default function Create() {
             Title<span>*</span>
           </label>
           <input
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
+            // onChange={(e) => setTitle(e.target.value)}
+            // value={title}
             dir="auto"
             type="text"
             name="title"
             className="form-control"
             id="exampleInputTitle"
-            aria-describedby="emailHelp"
             required
           />
         </div>
@@ -145,7 +124,6 @@ export default function Create() {
             accept="image/*"
             className="form-control"
             id="exampleInputEmail"
-            aria-describedby="emailHelp"
             required
           />
         </div>
@@ -156,13 +134,12 @@ export default function Create() {
             Audio (optional)
           </label>
           <input
-            onChange={(e) => setAudio(e.target.files[0])}
+            // onChange={(e) => setAudio(e.target.files[0])}
             type="file"
             name="audio"
             accept="audio/*"
             className="form-control"
             id="exampleInputAudio"
-            aria-describedby="emailHelp"
           />
         </div>
 
