@@ -48,16 +48,16 @@ export default function Create() {
         document.getElementsByTagName("form")[0].reset();
 
         // Show alert
-        // Swal.fire({
-        //   title: "Page created successfully!",
-        //   icon: "success",
-        //   confirmButtonColor: "#b6ac9a",
-        // }).then(() => {
-        //   // refetch sidebar data
-        setTriger((prev) => prev + 1);
-        //   // Navigate to /
-        nav("/dashboard");
-        // });
+        Swal.fire({
+          title: "Page created successfully!",
+          icon: "success",
+          confirmButtonColor: "#b6ac9a",
+        }).then(() => {
+          // refetch sidebar data
+          setTriger((prev) => prev + 1);
+          // Navigate to /dashboard
+          nav("/dashboard");
+        });
       }
     } catch (err) {
       // Show error alert
