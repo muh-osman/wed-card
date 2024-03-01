@@ -69,18 +69,11 @@ export default function Edit() {
     try {
       const response = await api.post(
         `api/cards/${id}?_method=PATCH`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        formData
       );
 
       // Check if the response is successful
       if (response.status === 201) {
-        // Update the state or perform any necessary actions
-        console.log("Data submitted successfully");
         // Stop button animation
         setClickedButton(false);
 
