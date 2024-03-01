@@ -7,11 +7,15 @@ import api from "../../api";
 import Swal from "sweetalert2";
 // useContext
 import { TrigerContext } from "../../context/trigerProvider";
+// .env
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Create() {
   // useContext
   const { triger, setTriger } = useContext(TrigerContext);
   // Store image to show
+  const [title, setTitle] = useState(null);
+  const [audio, setAudio] = useState(null);
   const [image, setImage] = useState(null);
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -23,54 +27,74 @@ export default function Create() {
 
   useEffect(() => {
     setImage(null);
+    setTitle(null);
+    setAudio(null);
     document.getElementsByTagName("form")[0].reset();
   }, []);
 
   // navigate
   const nav = useNavigate();
 
-  async function submitData(e) {
-    e.preventDefault();
-    setClickedButton(true);
-    const formData = new FormData(e.target);
+  // async function submitData(e) {
+  //   e.preventDefault();
+  //   setClickedButton(true);
+  //   const formData = new FormData(e.target);
 
-    try {
-      let res = await api.post("api/cards", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Connection: "close",
-        },
-      });
+  //   try {
+  //     let res = await api.post("api/cards", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         Connection: "close",
+  //       },
+  //     });
 
-      // Check if the response is successful
-      if (res.status === 201) {
-        // Reset the form after submission
-        document.getElementsByTagName("form")[0].reset();
+  //     // Check if the response is successful
+  //     if (res.status === 201) {
+  //       // Reset the form after submission
+  //       document.getElementsByTagName("form")[0].reset();
 
-        // Show alert
-        Swal.fire({
-          title: "Page created successfully!",
-          icon: "success",
-          confirmButtonColor: "#b6ac9a",
-        }).then(() => {
-          // refetch sidebar data
-          setTriger((prev) => prev + 1);
-          // Navigate to /dashboard
-          nav("/dashboard");
-        });
-      }
-    } catch (err) {
-      // Show error alert
-      Swal.fire({
-        title: "Error",
-        text: "Failed to create page",
-        icon: "error",
-        confirmButtonColor: "#b6ac9a",
-      });
-    } finally {
-      // Stop button animation
-      setClickedButton(false);
-    }
+  //       // Show alert
+  //       Swal.fire({
+  //         title: "Page created successfully!",
+  //         icon: "success",
+  //         confirmButtonColor: "#b6ac9a",
+  //       }).then(() => {
+  //         // refetch sidebar data
+  //         setTriger((prev) => prev + 1);
+  //         // Navigate to /dashboard
+  //         nav("/dashboard");
+  //       });
+  //     }
+  //   } catch (err) {
+  //     // Show error alert
+  //     Swal.fire({
+  //       title: "Error",
+  //       text: "Failed to create page",
+  //       icon: "error",
+  //       confirmButtonColor: "#b6ac9a",
+  //     });
+  //   } finally {
+  //     // Stop button animation
+  //     setClickedButton(false);
+  //   }
+  // }
+
+  function submitData() {
+    const formdata = new FormData();
+    formdata.append("title", title);
+    formdata.append("image", image);
+    formdata.append("audio", audio);
+
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch(`${apiUrl}api/cards`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
   }
 
   return (
@@ -96,6 +120,8 @@ export default function Create() {
             Title<span>*</span>
           </label>
           <input
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
             dir="auto"
             type="text"
             name="title"
@@ -129,6 +155,7 @@ export default function Create() {
             Audio (optional)
           </label>
           <input
+            onChange={(e) => setAudio(e.target.files[0])}
             type="file"
             name="audio"
             accept="audio/*"
