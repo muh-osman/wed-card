@@ -35,11 +35,52 @@ export default function Create() {
   // navigate
   const nav = useNavigate();
 
+  // async function submitData(e) {
+  //   e.preventDefault();
+  //   setClickedButton(true);
+  //   const formData = new FormData(e.target);
 
+  //   try {
+  //     let res = await api.post("api/cards", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         Connection: "close",
+  //       },
+  //     });
 
+  //     // Check if the response is successful
+  //     if (res.status === 201) {
+  //       // Reset the form after submission
+  //       document.getElementsByTagName("form")[0].reset();
 
+  //       // Show alert
+  //       Swal.fire({
+  //         title: "Page created successfully!",
+  //         icon: "success",
+  //         confirmButtonColor: "#b6ac9a",
+  //       }).then(() => {
+  //         // refetch sidebar data
+  //         setTriger((prev) => prev + 1);
+  //         // Navigate to /dashboard
+  //         nav("/dashboard");
+  //       });
+  //     }
+  //   } catch (err) {
+  //     // Show error alert
+  //     Swal.fire({
+  //       title: "Error",
+  //       text: "Failed to create page",
+  //       icon: "error",
+  //       confirmButtonColor: "#b6ac9a",
+  //     });
+  //   } finally {
+  //     // Stop button animation
+  //     setClickedButton(false);
+  //   }
+  // }
 
-  function submitData() {
+  function submitData(e) {
+    e.preventDefault();
     const formdata = new FormData();
     formdata.append("title", title);
     formdata.append("image", image);
