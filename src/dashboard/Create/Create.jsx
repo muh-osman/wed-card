@@ -30,11 +30,7 @@ export default function Create() {
     const formData = new FormData(e.target);
 
     try {
-      const res = await api.post("api/cards", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await api.post("api/cards", formData);
 
       // Show alert
       Swal.fire({
@@ -67,11 +63,7 @@ export default function Create() {
         Create a new page
       </h1>
       {/* form */}
-      <form
-        onSubmit={submitData}
-        encType="multipart/form-data"
-        id="create-form"
-      >
+      <form onSubmit={submitData} id="create-form">
         {image && (
           <div className="form-image-box">
             <img src={image} alt="card image" />
