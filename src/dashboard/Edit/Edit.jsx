@@ -65,12 +65,6 @@ export default function Edit() {
     setClickedButton(true);
     const form = document.getElementById(`edit-form-${id}`);
 
-    if (!form.checkValidity()) {
-      // Handle form validation errors
-      console.log("Form is not valid");
-      return;
-    }
-
     const formData = new FormData(form);
     try {
       const response = await api.post(
@@ -84,7 +78,7 @@ export default function Edit() {
       );
 
       // Check if the response is successful
-      if (response.status === 200) {
+      if (response.status === 201) {
         // Update the state or perform any necessary actions
         console.log("Data submitted successfully");
         // Stop button animation
