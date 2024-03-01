@@ -4,13 +4,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 // API
 import api from "../../api";
 // MUI icon
-// import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-// import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-// import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 // sweetalert
 import Swal from "sweetalert2";
 // useContext
@@ -22,8 +19,6 @@ export default function Edit() {
   //
   const nav = useNavigate();
 
-  // const [pageLink, setPageLink] = useState(null);
-  // const [copyDone, setCopyDone] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const [clickedButton, setClickedButton] = useState(false);
@@ -38,23 +33,18 @@ export default function Edit() {
 
   const { id } = useParams();
 
-  // const domain = window.location.origin; //Ex: http://localhost:3000
-
   async function fetchData() {
     try {
       const res = await api.get(`api/cards/${id}`);
       // console.log(res.data);
       setImage(res.data.image);
       setTitle(res.data.title);
-
-      // setPageLink(`${domain}/card/${id}`);
     } catch (err) {
       console.error(err);
     }
   }
 
   useEffect(() => {
-    // setCopyDone(false);
     setImage(null);
     document.getElementsByTagName("form")[0].reset();
     fetchData();
@@ -63,9 +53,9 @@ export default function Edit() {
   async function submitData(e) {
     e.preventDefault();
     setClickedButton(true);
-    const form = document.getElementById(`edit-form-${id}`);
 
-    const formData = new FormData(form);
+    const formData = new FormData(document.getElementById(`edit-form-${id}`));
+
     try {
       const response = await api.post(
         `api/cards/${id}?_method=PATCH`,
@@ -79,16 +69,18 @@ export default function Edit() {
 
       // Check if the response is successful
       if (response.status === 201) {
+        // Reset the form after submission
+        document.getElementById(`edit-form-${id}`).reset();
         // Stop button animation
         setClickedButton(false);
 
-        // Swal.fire({
-        //   position: "center",
-        //   icon: "success",
-        //   title: "All changes saved",
-        //   showConfirmButton: false,
-        //   timer: 2000,
-        // });
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "All changes saved",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       } else {
         // Handle API error
         console.log("Error submitting data");
