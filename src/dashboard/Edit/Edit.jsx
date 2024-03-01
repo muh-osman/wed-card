@@ -69,7 +69,12 @@ export default function Edit() {
     try {
       const response = await api.post(
         `api/cards/${id}?_method=PATCH`,
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       // Check if the response is successful
