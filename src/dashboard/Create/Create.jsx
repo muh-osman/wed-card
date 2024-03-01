@@ -1,5 +1,5 @@
 import "./Create.css";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // API
 import api from "../../api";
@@ -21,6 +21,11 @@ export default function Create() {
 
   const [clickedButton, setClickedButton] = useState(false);
 
+  useEffect(() => {
+    setImage(null);
+    document.getElementsByTagName("form")[0].reset();
+  }, []);
+
   // navigate
   const nav = useNavigate();
 
@@ -38,7 +43,6 @@ export default function Create() {
 
       // Check if the response is successful
       if (res.status === 201) {
-        
         // Reset the form after submission
         document.getElementsByTagName("form")[0].reset();
 
@@ -53,8 +57,6 @@ export default function Create() {
           // Navigate to /
           nav("/dashboard");
         });
-
-        setClickedButton(false);
       }
     } catch (err) {
       // Show error alert
@@ -69,11 +71,6 @@ export default function Create() {
       setClickedButton(false);
     }
   }
-
-  useEffect(() => {
-    setImage(null);
-    document.getElementsByTagName("form")[0].reset();
-  }, [id]);
 
   return (
     <div className="images-container">
