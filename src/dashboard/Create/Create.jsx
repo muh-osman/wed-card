@@ -38,6 +38,7 @@ export default function Create() {
       let res = await api.post("api/cards", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Connection: "close",
         },
       });
 
@@ -53,9 +54,9 @@ export default function Create() {
         //   confirmButtonColor: "#b6ac9a",
         // }).then(() => {
         //   // refetch sidebar data
-          setTriger((prev) => prev + 1);
+        setTriger((prev) => prev + 1);
         //   // Navigate to /
-          nav("/dashboard");
+        nav("/dashboard");
         // });
       }
     } catch (err) {
