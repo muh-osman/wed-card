@@ -38,6 +38,7 @@ export default function Create() {
 
       // Check if the response is successful
       if (res.status === 201) {
+        
         // Reset the form after submission
         document.getElementsByTagName("form")[0].reset();
 
