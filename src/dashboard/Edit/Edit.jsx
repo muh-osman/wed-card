@@ -77,13 +77,13 @@ export default function Edit() {
         // Stop button animation
         setClickedButton(false);
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "All changes saved",
-          showConfirmButton: false,
-          timer: 2000,
-        });
+        // Swal.fire({
+        //   position: "center",
+        //   icon: "success",
+        //   title: "All changes saved",
+        //   showConfirmButton: false,
+        //   timer: 2000,
+        // });
       } else {
         // Handle API error
         console.log("Error submitting data");
