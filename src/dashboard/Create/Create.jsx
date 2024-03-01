@@ -30,7 +30,7 @@ export default function Create() {
     const formData = new FormData(e.target);
 
     try {
-      const res = await api.post("api/cards", formData);
+      await api.post("api/cards", formData);
 
       // Show alert
       Swal.fire({
@@ -63,7 +63,11 @@ export default function Create() {
         Create a new page
       </h1>
       {/* form */}
-      <form onSubmit={submitData} id="create-form">
+      <form
+        onSubmit={submitData}
+        id="create-form"
+        encType="multipart/form-data"
+      >
         {image && (
           <div className="form-image-box">
             <img src={image} alt="card image" />
