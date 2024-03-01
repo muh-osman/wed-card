@@ -25,7 +25,7 @@ export default function Create() {
   useEffect(() => {
     // Reset form
     setImage(null);
-    document.getElementsByTagName("form")[0].reset();
+    document.getElementById("create-form").reset();
   }, []);
 
   // Navigate after submit
@@ -35,7 +35,7 @@ export default function Create() {
     e.preventDefault();
     // Start animation submit button
     setClickedButton(true);
-    
+
     const formData = new FormData(e.target);
 
     try {
@@ -47,7 +47,7 @@ export default function Create() {
 
       if (res.status === 201) {
         // Reset the form after submission
-        document.getElementsByTagName("form")[0].reset();
+        document.getElementById("create-form").reset();
         // Show success alert
         Swal.fire({
           title: "Page created successfully!",
@@ -56,12 +56,11 @@ export default function Create() {
         }).then(() => {
           // refetch sidebar data
           setTriger((prev) => prev + 1);
-          // Navigate to /dashboard
+          // Navigate to: dashboard
           nav("/dashboard");
         });
       }
     } catch (err) {
-      //
       console.log(err);
     } finally {
       // Stop button animation
@@ -92,8 +91,6 @@ export default function Create() {
             Title<span>*</span>
           </label>
           <input
-            // onChange={(e) => setTitle(e.target.value)}
-            // value={title}
             dir="auto"
             type="text"
             name="title"
@@ -125,7 +122,6 @@ export default function Create() {
             Audio (optional)
           </label>
           <input
-            // onChange={(e) => setAudio(e.target.files[0])}
             type="file"
             name="audio"
             accept="audio/*"
