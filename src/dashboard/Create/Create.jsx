@@ -1,22 +1,19 @@
-import axios from "axios";
 import "./Create.css";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // API
 import api from "../../api";
-// sweetalert
+// Sweet Alert
 import Swal from "sweetalert2";
 // useContext
 import { TrigerContext } from "../../context/trigerProvider";
-// .env
-// const apiUrl = process.env.REACT_APP_API_URL;
-//
 
 export default function Create() {
+  // Control animation submit button
+  const [clickedButton, setClickedButton] = useState(false);
+
   // useContext
   const { triger, setTriger } = useContext(TrigerContext);
-  // const [title, setTitle] = useState("");
-  // const [audio, setAudio] = useState(null);
   // Store image to show
   const [image, setImage] = useState(null);
   const handleImageChange = (e) => {
@@ -25,35 +22,29 @@ export default function Create() {
     setImage(imageUrl);
   };
 
-  const [clickedButton, setClickedButton] = useState(false);
-
   useEffect(() => {
-    // setTitle("");
+    // Reset form
     setImage(null);
-    // setAudio(null);
     document.getElementsByTagName("form")[0].reset();
   }, []);
 
-  // navigate
+  // Navigate after submit
   const nav = useNavigate();
 
   async function submitData(e) {
     e.preventDefault();
+    // Start animation submit button
     setClickedButton(true);
+    
     const formData = new FormData(e.target);
 
     try {
-      let res = await axios.postForm(
-        "https://h-creations.net/test/public/api/cards",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      let res = await api.post("api/cards", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-      // Check if the response is successful
       if (res.status === 201) {
         // Reset the form after submission
         document.getElementsByTagName("form")[0].reset();
