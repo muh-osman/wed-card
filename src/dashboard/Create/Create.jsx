@@ -79,6 +79,8 @@ export default function Create() {
   //   }
   // }
 
+  
+
   function submitData() {
     const formdata = new FormData();
     formdata.append("title", title);
