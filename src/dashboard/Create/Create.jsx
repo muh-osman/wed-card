@@ -30,7 +30,11 @@ export default function Create() {
     const formData = new FormData(e.target);
 
     try {
-      await api.post("api/cards", formData);
+      await api.post("api/cards", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       // Show alert
       Swal.fire({
