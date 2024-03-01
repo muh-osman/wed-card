@@ -30,23 +30,31 @@ export default function Create() {
     const formData = new FormData(e.target);
 
     try {
-      await api.post("api/cards", formData, {
+      let res = await api.post("api/cards", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      // Show alert
-      Swal.fire({
-        title: "Page created successfully!",
-        icon: "success",
-        confirmButtonColor: "#b6ac9a",
-      }).then(() => {
-        // refetch sidebar data
-        setTriger((prev) => prev + 1);
-        // Navigate to /
-        nav("/dashboard");
-      });
+      // Check if the response is successful
+      if (res.status === 201) {
+        // Reset the form after submission
+        document.getElementsByTagName("form")[0].reset();
+
+        // Show alert
+        Swal.fire({
+          title: "Page created successfully!",
+          icon: "success",
+          confirmButtonColor: "#b6ac9a",
+        }).then(() => {
+          // refetch sidebar data
+          setTriger((prev) => prev + 1);
+          // Navigate to /
+          nav("/dashboard");
+        });
+
+        setClickedButton(false);
+      }
     } catch (err) {
       // Show error alert
       Swal.fire({
@@ -60,6 +68,11 @@ export default function Create() {
       setClickedButton(false);
     }
   }
+
+  useEffect(() => {
+    setImage(null);
+    document.getElementsByTagName("form")[0].reset();
+  }, [id]);
 
   return (
     <div className="images-container">

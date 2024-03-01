@@ -57,19 +57,14 @@ export default function Edit() {
     const formData = new FormData(document.getElementById(`edit-form-${id}`));
 
     try {
-      const response = await api.post(
-        `api/cards/${id}?_method=PATCH`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      let res = await api.post(`api/cards/${id}?_method=PATCH`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       // Check if the response is successful
-      if (response.status === 201) {
-        
+      if (res.status === 201) {
         // Reset the form after submission
         document.getElementsByTagName("form")[0].reset();
 
@@ -92,14 +87,15 @@ export default function Edit() {
     } catch (err) {
       // Handle network errors
       console.error(err);
-      // Stop button animation
-      setClickedButton(false);
       // Display an error message to the user
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong! Please try again.",
       });
+    } finally {
+      // Stop button animation
+      setClickedButton(false);
     }
   }
 
