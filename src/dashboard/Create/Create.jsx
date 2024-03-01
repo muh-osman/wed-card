@@ -33,7 +33,6 @@ export default function Create() {
 
   async function submitData(e) {
     e.preventDefault();
-    // Start animation submit button
     setClickedButton(true);
 
     const formData = new FormData(e.target);
@@ -43,27 +42,29 @@ export default function Create() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      });
+        onUploadProgress: function (progressEvent) {
+          let progress = (progressEvent.loaded / progressEvent.total) * 100;
 
-      if (res.status === 201) {
-        // Reset the form after submission
-        document.getElementById("create-form").reset();
-        // Show success alert
-        Swal.fire({
-          title: "Page created successfully!",
-          icon: "success",
-          confirmButtonColor: "#b6ac9a",
-        }).then(() => {
-          // refetch sidebar data
-          setTriger((prev) => prev + 1);
-          // Navigate to: dashboard
-          nav("/dashboard");
-        });
-      }
+          console.log(progress);
+
+          if (progress === 100) {
+            setTimeout(() => {
+              setClickedButton(false);
+              document.getElementById("create-form").reset();
+              Swal.fire({
+                title: "Page created successfully!",
+                icon: "success",
+                confirmButtonColor: "#b6ac9a",
+              }).then(() => {
+                setTriger((prev) => prev + 1);
+                nav("/dashboard");
+              });
+            }, 3000);
+          }
+        },
+      });
     } catch (err) {
       console.log(err);
-    } finally {
-      // Stop button animation
       setClickedButton(false);
     }
   }

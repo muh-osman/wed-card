@@ -61,30 +61,37 @@ export default function Edit() {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+
+        onUploadProgress: function (progressEvent) {
+          let progress = (progressEvent.loaded / progressEvent.total) * 100;
+
+          console.log(progress);
+
+          if (progress === 100) {
+            setTimeout(() => {
+              setClickedButton(false);
+
+              // Reset the form after submission
+              document.getElementsByTagName("form")[0].reset();
+
+              // Stop button animation
+              setClickedButton(false);
+
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "All changes saved",
+                showConfirmButton: false,
+                timer: 2000,
+              }).then(() => {
+                nav("/dashboard");
+              });
+            }, 3000);
+          }
+        },
       });
-
-      // Check if the response is successful
-      if (res.status === 201) {
-        // Reset the form after submission
-        document.getElementsByTagName("form")[0].reset();
-
-        // Stop button animation
-        setClickedButton(false);
-
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "All changes saved",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      } else {
-        // Handle API error
-        console.log("Error submitting data");
-        // Stop button animation
-        setClickedButton(false);
-      }
     } catch (err) {
+      setClickedButton(false);
       // Handle network errors
       console.error(err);
       // Display an error message to the user
@@ -93,9 +100,6 @@ export default function Edit() {
         title: "Oops...",
         text: "Something went wrong! Please try again.",
       });
-    } finally {
-      // Stop button animation
-      setClickedButton(false);
     }
   }
 
