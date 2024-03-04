@@ -50,12 +50,12 @@
     background-color: #edf4fc;
     transition: 0.5s;
   }
+}
 
-  .btn_box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.btn_create_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* sweet alert btn */

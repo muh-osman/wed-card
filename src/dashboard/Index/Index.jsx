@@ -102,7 +102,7 @@ export default function Index() {
 
   return (
     <div className="dash_index_cotainer">
-      <h1>To edit, select the page from the sidebar.</h1>
+      {/* <h1>To edit, select the page from the sidebar.</h1> */}
 
       <div className="home_container">
         <div className="cards_box">{cards}</div>

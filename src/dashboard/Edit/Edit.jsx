@@ -149,7 +149,7 @@ export default function Edit() {
 
         {/* Image */}
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail" className="form-label">
+          <label htmlFor="exampleInputImage" className="form-label">
             Image:
           </label>
           <input
@@ -158,16 +158,30 @@ export default function Edit() {
             name="image"
             accept="image/*"
             className="form-control"
-            id="exampleInputEmail"
+            id="exampleInputImage"
             aria-describedby="emailHelp"
             // defaultValue={image}
+          />
+        </div>
+
+        {/* Location */}
+        <div className="mb-3">
+          <label htmlFor="exampleInputLocation" className="form-label">
+            Location:
+          </label>
+          <input
+            dir="ltr"
+            type="text"
+            name="location"
+            className="form-control"
+            id="exampleInputLocation"
           />
         </div>
 
         {/* Audio */}
         <div className="mb-3">
           <label htmlFor="exampleInputAudio" className="form-label">
-            Audio (optional)
+            Audio:
           </label>
           <input
             type="file"

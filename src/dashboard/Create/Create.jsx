@@ -103,7 +103,7 @@ export default function Create() {
 
         {/* Image */}
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail" className="form-label">
+          <label htmlFor="exampleInputImage" className="form-label">
             Image<span>*</span>
           </label>
           <input
@@ -112,8 +112,22 @@ export default function Create() {
             name="image"
             accept="image/*"
             className="form-control"
-            id="exampleInputEmail"
+            id="exampleInputImage"
             required
+          />
+        </div>
+
+        {/* Location */}
+        <div className="mb-3">
+          <label htmlFor="exampleInputLocation" className="form-label">
+            Location (optional)
+          </label>
+          <input
+            dir="ltr"
+            type="text"
+            name="location"
+            className="form-control"
+            id="exampleInputLocation"
           />
         </div>
 
@@ -132,7 +146,7 @@ export default function Create() {
         </div>
 
         {/* submit btn */}
-        <div className="btn_box">
+        <div className="btn_create_box">
           <button
             type="submit"
             className="btn btn-primary mt-2 mb-2"

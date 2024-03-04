@@ -17,9 +17,9 @@
     }
   }
 
-  /* .location_box {
+  .location_box {
     padding-top: 16px;
-    padding-bottom: 32px;
+    padding-bottom: 64px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,19 +30,22 @@
 
     a {
       text-decoration: none;
-      background-color: #ef5da8;
+      background-color: #000;
       color: #fef8fb;
       padding: 6px 16px;
       border-radius: 6px;
       display: inline-block;
+      border: 1px solid transparent;
       transition: 0.2s;
+      cursor: pointer;
 
       &:hover {
         background-color: #fef8fb;
-        color: #623e97;
+        color: #000 !important;
+        border: 1px solid #000;
       }
     }
-  } */
+  }
 
   .form_card_box {
     padding: 32px;
@@ -51,14 +54,10 @@
     /* background: linear-gradient(270deg, #623e97 0%, #8b3b95 50%, #c964a5 100%); */
     background-color: transparent;
     position: absolute;
-    bottom: 0;
+    bottom: 29px;
     left: 50%;
     transform: translateX(-50%);
     max-width: 516px;
-  }
-
-  input[type="radio"] {
-    accent-color: red !important;
   }
 
   span {
@@ -81,22 +80,21 @@
 }
 
 .custom_btn {
-  background-color: #000 !important;
+  border: 1px solid transparent !important;
   color: #fef8fb !important;
-  border-color: transparent !important;
-  border-color: transparent !important;
+  background-color: #000 !important;
 
   &:hover {
-    border-color: transparent !important;
     background-color: #fef8fb !important;
     color: #000 !important;
+    border: 1px solid #000 !important;
   }
 }
 
 /* Audio button */
 .audio_container {
   position: fixed;
-  bottom: 22px;
+  top: 22px;
   right: 22px;
   display: flex;
   align-items: center;
@@ -166,5 +164,71 @@
   100% {
     transform: scale(1.8);
     opacity: 0;
+  }
+}
+
+/* Footer */
+.footer {
+  width: 100%;
+  background-color: #f5f5f7;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6e6e73;
+  font-size: 14px;
+  padding: 3px;
+  position: relative;
+}
+
+.footer a {
+  cursor: pointer;
+}
+
+.footer p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.footer span {
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer button {
+  position: absolute;
+  right: 6px;
+  border: none;
+  color: #6e6e73;
+
+  &:hover {
+    color: #000;
+  }
+}
+
+/* Location icon */
+.location-icon {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-18px);
+  }
+
+  60% {
+    transform: translateY(-9px);
   }
 }

@@ -2,9 +2,11 @@ import "./Card.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 // MUI icons
-// import LocationOnIcon from "@mui/icons-material/LocationOn";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PrintIcon from "@mui/icons-material/Print";
 // Me(Axios)
 import api from "../../api";
 // sweetalert
@@ -28,6 +30,7 @@ export default function Card() {
 
   const [data, setData] = useState(null);
   const [audioType, setAudioType] = useState("");
+
   async function fetchData() {
     try {
       const res = await api.get(`api/cards/${id}`);
@@ -102,15 +105,22 @@ export default function Card() {
 
   return (
     <div className="card_container">
+      {/* image box */}
       <div className="card_img_box">
         {data && <img src={data.image} alt="card image" />}
       </div>
 
       <div className="form_card_box" dir="rtl">
-        {/* <div className="location_box">
-          <LocationOnIcon sx={{ fontSize: "32px", color: "#fff" }} />
-          <a href={data?.link}>الموقع</a>
-        </div> */}
+        {/* Location btn */}
+        {data?.location && (
+          <div className="location_box">
+            <LocationOnIcon
+              className="location-icon"
+              sx={{ fontSize: "32px", color: "#000" }}
+            />
+            <a href={data?.location}>الموقع</a>
+          </div>
+        )}
 
         <form name={`submit-to-google-sheet-${id}`} onSubmit={handleSubmit}>
           <div style={{ textAlign: "center", marginBottom: "16px" }}>
@@ -219,6 +229,32 @@ export default function Card() {
           </button>
         </div>
       )}
+
+      {/* footer */}
+      <section className="footer">
+        <p>
+          Made with{" "}
+          <span>
+            {" "}
+            &nbsp; <FavoriteIcon
+              style={{ color: "red", fontSize: ".7em" }}
+            />{" "}
+            &nbsp;{" "}
+          </span>{" "}
+          by&nbsp;
+          <a
+            href="https://www.tsmimseham.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Tsmim Seham
+          </a>
+        </p>
+
+        <button onClick={() => window.print()}>
+          <PrintIcon />
+        </button>
+      </section>
     </div>
   );
 }
