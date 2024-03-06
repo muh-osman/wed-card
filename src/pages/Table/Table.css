@@ -1,20 +1,19 @@
 .table_container {
   min-height: 100vh;
-
-  h1 {
-    color: #757575;
-  }
-
   padding: 16px;
   padding-top: 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
 
-  span {
-    color: #000;
-  }
+.table-h1 {
+  color: #757575;
+}
+
+.table-span {
+  color: #000;
 }
 
 /* Footer */
@@ -54,8 +53,8 @@
   right: 6px;
   border: none;
   color: #6e6e73;
+}
 
-  &:hover {
-    color: #000;
-  }
+.table-footer button:hover {
+  color: #000;
 }

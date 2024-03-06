@@ -52,8 +52,8 @@ export default function Table() {
   return (
     <div className="table_container" dir="rtl">
       <div className="w-100">
-        <h1 className="mb-5 text-center">
-          ردود ضيوف <span>"{pageTitle}"</span>
+        <h1 className="mb-5 text-center table-h1">
+          ردود ضيوف <span className="table-span">"{pageTitle}"</span>
         </h1>
 
         <table className="table table-striped">
